@@ -1,10 +1,20 @@
 // src/app/layout.tsx
 import type { Metadata } from "next"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Inter, Inter_Tight } from "next/font/google"
 import { Toaster } from "sonner"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { site } from "@/config/site"
 import "./globals.css"
+
+// A referência usa HelveticaNowDisplay (licença Monotype, não pode ser
+// embutida). Inter Tight é o substituto livre mais próximo: mesma grotesca
+// neutra, desenhada para títulos grandes com tracking apertado.
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
+})
 
 const inter = Inter({
   variable: "--font-inter",
@@ -12,17 +22,10 @@ const inter = Inter({
   display: "swap",
 })
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-})
-
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.autora.nome} — ${site.livro.titulo}`,
+    default: `${site.livro.titulo} — ${site.autora.nome}`,
     template: `%s | ${site.autora.nome}`,
   },
   description: site.livro.sinopse,
@@ -35,6 +38,7 @@ export const metadata: Metadata = {
     "literatura médica",
   ],
   authors: [{ name: site.autora.nome, url: site.url }],
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "pt_BR",
@@ -51,35 +55,18 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-// Aplica o tema salvo antes da hidratação — evita flash.
-// Padrão do site é claro; o escuro só entra se o usuário escolher.
-const themeScript = `
-(function(){
-  try {
-    if (localStorage.getItem('km-theme') === 'dark') {
-      document.documentElement.classList.add('dark');
-    }
-  } catch(e) {}
-})();
-`.trim()
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    // As variáveis das fontes ficam no <html> para que os tokens de
-    // `:root` no globals.css consigam enxergá-las.
     <html
       lang="pt-BR"
-      className={`${inter.variable} ${playfair.variable}`}
+      className={`${inter.variable} ${interTight.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body className="antialiased" suppressHydrationWarning>
         {children}
-        <Toaster position="top-center" richColors duration={3500} />
+        <Toaster position="top-center" duration={3500} />
         <SpeedInsights />
       </body>
     </html>

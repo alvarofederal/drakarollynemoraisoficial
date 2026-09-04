@@ -20,7 +20,7 @@ export function LoginForm({ redirect }: { redirect: string }) {
 
       <div className="space-y-2">
         <Label htmlFor="email" className="flex items-center gap-2 text-sm">
-          <Mail className="size-4 text-brand" /> E-mail
+          <Mail className="size-4 text-ink" /> E-mail
         </Label>
         <Input
           id="email"
@@ -34,7 +34,7 @@ export function LoginForm({ redirect }: { redirect: string }) {
 
       <div className="space-y-2">
         <Label htmlFor="senha" className="flex items-center gap-2 text-sm">
-          <KeyRound className="size-4 text-brand" /> Senha
+          <KeyRound className="size-4 text-ink" /> Senha
         </Label>
         <Input
           id="senha"

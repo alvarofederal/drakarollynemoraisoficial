@@ -1,84 +1,56 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 /* ═══════════════════════════════════════════════════════════════
    IDENTIDADE VISUAL — Dra. Karollyne Morais
    ───────────────────────────────────────────────────────────────
-   Paleta provisória (neutra/editorial) enquanto a identidade
-   definitiva não chega. Para trocar a identidade do site inteiro,
-   basta alterar o bloco "MARCA" abaixo — todo o resto deriva dele.
+   Sistema editorial austero: tela branca, tipografia quase preta em
+   escala arquitetônica, um único acento quente (terracota) usado uma
+   vez por página, e faixas escuras alternando com o branco.
+   Referência: Hyer Aviation (flyhyer.com).
+
+   Regras de ouro:
+   - Nenhuma sombra. A elevação vem da troca de superfície.
+   - Nenhum acento além do terracota. Um por página.
+   - Botão é sempre pílula (rounded-full). Card é sempre 0px.
+   - Corpo de texto nunca abaixo de 18px.
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
   /* ── MARCA ── */
-  --brand:          oklch(0.45 0.09 250); /* cor principal        */
-  --brand-soft:     oklch(0.93 0.03 250); /* fundo suave da marca */
-  --brand-strong:   oklch(0.33 0.10 250); /* hover / texto forte  */
-  --brand-contrast: oklch(0.99 0 0);      /* texto sobre a marca  */
-  --accent-warm:    oklch(0.78 0.14 75);  /* dourado — destaque do livro */
+  --deep-ink: #000d10; /* texto, botões cheios, rodapé */
+  --pure-white: #ffffff; /* tela e cartões */
+  --cool-ash: #8e8e95; /* texto secundário */
+  --pebble: #d5d3d4; /* fios de 1px, divisórias */
+  --midnight-hull: #0f0f1c; /* faixa escura */
+  --charcoal-deck: #151623; /* painel escuro elevado */
+  --clay-ember: #bc7155; /* acento quente — uma vez por página */
 
-  --surface:        oklch(0.99 0.004 90); /* papel / fundo    */
-  --surface-raised: oklch(1 0 0);         /* cartões          */
-  --ink:            oklch(0.22 0.02 265); /* texto principal  */
-  --ink-soft:       oklch(0.50 0.02 265); /* texto secundário */
-
-  --fonte-titulo: var(--font-playfair), Georgia, "Times New Roman", serif;
-  --fonte-texto: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --fonte-titulo: var(--font-inter-tight), "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  --fonte-texto: var(--font-inter), "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
 
   /* ── shadcn/ui (derivado da marca) ── */
-  --radius: 0.75rem;
-  --background: var(--surface);
-  --foreground: var(--ink);
-  --card: var(--surface-raised);
-  --card-foreground: var(--ink);
-  --popover: var(--surface-raised);
-  --popover-foreground: var(--ink);
-  --primary: var(--brand);
-  --primary-foreground: var(--brand-contrast);
-  --secondary: var(--brand-soft);
-  --secondary-foreground: var(--brand-strong);
-  --muted: oklch(0.96 0.005 90);
-  --muted-foreground: var(--ink-soft);
-  --accent: var(--brand-soft);
-  --accent-foreground: var(--brand-strong);
-  --destructive: oklch(0.58 0.22 27);
-  --border: oklch(0.90 0.01 265);
-  --input: oklch(0.90 0.01 265);
-  --ring: var(--brand);
-}
-
-.dark {
-  --brand:          oklch(0.72 0.10 250);
-  --brand-soft:     oklch(0.24 0.04 250);
-  --brand-strong:   oklch(0.85 0.07 250);
-  --brand-contrast: oklch(0.16 0.02 265);
-  --accent-warm:    oklch(0.80 0.14 75);
-
-  --surface:        oklch(0.16 0.012 265);
-  --surface-raised: oklch(0.20 0.014 265);
-  --ink:            oklch(0.96 0.005 90);
-  --ink-soft:       oklch(0.70 0.01 265);
-
-  --background: var(--surface);
-  --foreground: var(--ink);
-  --card: var(--surface-raised);
-  --card-foreground: var(--ink);
-  --popover: var(--surface-raised);
-  --popover-foreground: var(--ink);
-  --primary: var(--brand);
-  --primary-foreground: var(--brand-contrast);
-  --secondary: var(--brand-soft);
-  --secondary-foreground: var(--brand-strong);
-  --muted: oklch(0.24 0.01 265);
-  --muted-foreground: var(--ink-soft);
-  --accent: var(--brand-soft);
-  --accent-foreground: var(--brand-strong);
-  --destructive: oklch(0.65 0.20 27);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: var(--brand);
+  --radius: 0px; /* cartões e campos são retos; só o botão é pílula */
+  --background: var(--pure-white);
+  --foreground: var(--deep-ink);
+  --card: var(--pure-white);
+  --card-foreground: var(--deep-ink);
+  --popover: var(--pure-white);
+  --popover-foreground: var(--deep-ink);
+  --primary: var(--deep-ink);
+  --primary-foreground: var(--pure-white);
+  --secondary: #f4f3f2;
+  --secondary-foreground: var(--deep-ink);
+  --muted: #f4f3f2;
+  --muted-foreground: var(--cool-ash);
+  --accent: #f4f3f2;
+  --accent-foreground: var(--deep-ink);
+  --destructive: #b4321f;
+  --border: var(--pebble);
+  --input: var(--pebble);
+  --ring: var(--deep-ink);
 }
 
 @theme inline {
@@ -101,20 +73,20 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --color-brand: var(--brand);
-  --color-brand-soft: var(--brand-soft);
-  --color-brand-strong: var(--brand-strong);
-  --color-accent-warm: var(--accent-warm);
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
+  --color-ink: var(--deep-ink);
+  --color-ash: var(--cool-ash);
+  --color-pebble: var(--pebble);
+  --color-hull: var(--midnight-hull);
+  --color-deck: var(--charcoal-deck);
+  --color-clay: var(--clay-ember);
 
   --font-display: var(--fonte-titulo);
   --font-sans: var(--fonte-texto);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 6px);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
 }
 
 @layer base {
@@ -127,39 +99,272 @@
     font-family: var(--fonte-texto);
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--fonte-titulo);
-    letter-spacing: -0.01em;
+    font-weight: 700;
   }
 
   ::selection {
-    background: var(--brand);
-    color: var(--brand-contrast);
+    background: var(--deep-ink);
+    color: var(--pure-white);
   }
 }
 
-/* ── Utilitários do projeto ── */
+/* ═══════════════════════════════════════
+   ESCALA TIPOGRÁFICA
+   O peso 700 com tracking negativo é a voz
+   da marca. Nunca usar peso leve em título.
+   ═══════════════════════════════════════ */
 
-/* Destaque do livro: sombra editorial recortada na silhueta da capa */
+.t-hero {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(3rem, 9.2vw, 8.75rem);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+}
+
+.t-display {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(2.75rem, 7vw, 3.95rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.t-heading-lg {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.t-heading {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(1.85rem, 4vw, 2.3rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.t-subheading {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.4375rem; /* 23px */
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* Corpo: 18px / 1.61 é assinatura do sistema — não reduzir */
+.t-body {
+  font-size: 1.125rem;
+  line-height: 1.61;
+}
+
+.t-caption {
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.2;
+}
+
+/* Fio de 1px acima dos blocos de feature */
+.hairline {
+  border-top: 1px solid var(--pebble);
+}
+
+/* Mesmo fio, sobre superfície escura */
+.hairline-inverse {
+  border-top: 1px solid rgb(255 255 255 / 0.2);
+}
+
+/* ═══════════════════════════════════════
+   CÉU E NUVENS — cenário do hero
+   Gradiente de céu pálido para creme, com
+   bancos de nuvem em deriva lenta.
+   ═══════════════════════════════════════ */
+
+.sky {
+  /* O azul precisa descer até quase o rodapé do hero — é ele que dá
+     contraste para as nuvens brancas. O creme entra só no finalzinho. */
+  background: linear-gradient(
+    180deg,
+    #8badc9 0%,
+    #9dbad2 18%,
+    #b0c8dd 40%,
+    #c0d3e4 60%,
+    #cddbe8 76%,
+    #e3e6e4 90%,
+    #ffffff 100%
+  );
+}
+
+.cloud-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Cada nuvem é um aglomerado de bolhas claras — várias elipses no mesmo
+   elemento dão volume de cúmulo, coisa que um gradiente só não faz. */
+.cloud {
+  position: absolute;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+.cloud-a {
+  left: -14%;
+  bottom: -2%;
+  width: 88%;
+  height: 42%;
+  filter: blur(10px);
+  background-image: radial-gradient(
+      ellipse 34% 62% at 26% 62%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.98) 46%,
+      rgba(255, 255, 255, 0) 78%
+    ),
+    radial-gradient(
+      ellipse 28% 88% at 46% 44%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.96) 44%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    radial-gradient(
+      ellipse 30% 54% at 68% 66%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.95) 46%,
+      rgba(255, 255, 255, 0) 78%
+    ),
+    radial-gradient(
+      ellipse 52% 40% at 48% 84%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 52%,
+      rgba(255, 255, 255, 0) 84%
+    );
+  animation: drift-right 70s ease-in-out infinite;
+}
+
+.cloud-b {
+  right: -18%;
+  bottom: 4%;
+  width: 82%;
+  height: 38%;
+  filter: blur(13px);
+  opacity: 0.92;
+  background-image: radial-gradient(
+      ellipse 30% 70% at 30% 56%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.96) 44%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    radial-gradient(
+      ellipse 26% 92% at 55% 42%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.94) 42%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    radial-gradient(
+      ellipse 46% 44% at 62% 80%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 0) 84%
+    );
+  animation: drift-left 88s ease-in-out infinite;
+}
+
+/* Véu alto e ralo, bem acima do banco principal */
+.cloud-c {
+  left: 8%;
+  bottom: 34%;
+  width: 70%;
+  height: 22%;
+  filter: blur(30px);
+  opacity: 0.42;
+  background-image: radial-gradient(
+      ellipse 40% 70% at 34% 50%,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0) 74%
+    ),
+    radial-gradient(
+      ellipse 34% 60% at 70% 56%,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0) 74%
+    );
+  animation: drift-right 104s ease-in-out infinite reverse;
+}
+
+/* Névoa rasa que funde o banco de nuvens com o branco da página */
+.cloud-floor {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 16%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.7) 46%,
+    #ffffff 100%
+  );
+  pointer-events: none;
+}
+
+@keyframes drift-right {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(7%, -2%, 0);
+  }
+}
+
+@keyframes drift-left {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-7%, -3%, 0);
+  }
+}
+
+/* ═══════════════════════════════════════
+   LIVRO — o objeto herói da página
+   ═══════════════════════════════════════ */
+
 .book-shadow {
-  filter:
-    drop-shadow(0 24px 40px rgb(0 0 0 / 0.24))
-    drop-shadow(0 4px 10px rgb(0 0 0 / 0.12));
+  filter: drop-shadow(0 34px 46px rgba(0, 13, 16, 0.28))
+    drop-shadow(0 6px 14px rgba(0, 13, 16, 0.14));
 }
 
 .floating {
-  animation: floating 7s ease-in-out infinite;
+  animation: floating 9s ease-in-out infinite;
 }
 
 @keyframes floating {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-14px); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(-1deg);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .floating { animation: none; }
+  .floating,
+  .cloud {
+    animation: none;
+  }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;

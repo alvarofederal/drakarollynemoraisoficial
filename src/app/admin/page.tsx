@@ -19,7 +19,7 @@ export default async function AdminPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Pedidos</h1>
-        <p className="mt-1 text-sm text-ink-soft">
+        <p className="mt-1 text-sm text-ash">
           Todo mundo que preencheu o endereço no site para receber o livro.
         </p>
       </div>
@@ -39,7 +39,7 @@ export default async function AdminPage() {
 function Metrica({ rotulo, valor }: { rotulo: string; valor: number }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-5">
-      <p className="text-[11px] font-medium uppercase tracking-wider text-ink-soft">
+      <p className="text-[11px] font-medium uppercase tracking-wider text-ash">
         {rotulo}
       </p>
       <p className="mt-1.5 font-display text-3xl font-semibold">{valor}</p>

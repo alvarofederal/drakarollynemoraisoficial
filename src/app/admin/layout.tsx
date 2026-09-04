@@ -27,7 +27,7 @@ export default async function AdminLayout({
             <p className="truncate font-display text-base font-semibold">
               Painel de pedidos
             </p>
-            <p className="truncate text-xs text-ink-soft">
+            <p className="truncate text-xs text-ash">
               {sessao.user.name ?? sessao.user.email}
             </p>
           </div>

@@ -52,11 +52,11 @@ const STATUS_OPCOES = [
 ]
 
 const STATUS_COR: Record<string, string> = {
-  AGUARDANDO: "border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400",
-  PAGO: "border-blue-500/40 bg-blue-500/10 text-blue-700 dark:text-blue-400",
-  ENVIADO: "border-violet-500/40 bg-violet-500/10 text-violet-700 dark:text-violet-400",
-  ENTREGUE: "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400",
-  CANCELADO: "border-red-500/40 bg-red-500/10 text-red-700 dark:text-red-400",
+  AGUARDANDO: "border-amber-500/40 bg-amber-500/10 text-amber-700",
+  PAGO: "border-blue-500/40 bg-blue-500/10 text-blue-700",
+  ENVIADO: "border-violet-500/40 bg-violet-500/10 text-violet-700",
+  ENTREGUE: "border-emerald-500/40 bg-emerald-500/10 text-emerald-700",
+  CANCELADO: "border-red-500/40 bg-red-500/10 text-red-700",
 }
 
 function enderecoCompleto(p: PedidoLinha) {
@@ -117,7 +117,7 @@ export function TabelaPedidos({ pedidos }: { pedidos: PedidoLinha[] }) {
           </SelectContent>
         </Select>
 
-        <p className="text-sm text-ink-soft sm:ml-auto">
+        <p className="text-sm text-ash sm:ml-auto">
           {visiveis.length} de {pedidos.length}
         </p>
       </div>
@@ -125,7 +125,7 @@ export function TabelaPedidos({ pedidos }: { pedidos: PedidoLinha[] }) {
       {visiveis.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-border bg-card py-16 text-center">
           <p className="font-medium">Nenhum pedido por aqui</p>
-          <p className="mt-1 text-sm text-ink-soft">
+          <p className="mt-1 text-sm text-ash">
             Os pedidos feitos no site aparecem nesta lista.
           </p>
         </div>
@@ -183,13 +183,13 @@ function CartaoPedido({ pedido }: { pedido: PedidoLinha }) {
                 pedido.status}
             </span>
             {pedido.quantidade > 1 ? (
-              <span className="rounded-full border border-border px-2 py-0.5 text-[11px] text-ink-soft">
+              <span className="rounded-full border border-border px-2 py-0.5 text-[11px] text-ash">
                 {pedido.quantidade} exemplares
               </span>
             ) : null}
           </div>
 
-          <p className="mt-1 text-xs text-ink-soft">
+          <p className="mt-1 text-xs text-ash">
             {new Intl.DateTimeFormat("pt-BR", {
               dateStyle: "short",
               timeStyle: "short",
@@ -260,17 +260,17 @@ function CartaoPedido({ pedido }: { pedido: PedidoLinha }) {
 
       <div className="mt-4 grid gap-4 border-t border-border pt-4 sm:grid-cols-2">
         <div>
-          <p className="text-[11px] font-medium uppercase tracking-wider text-ink-soft">
+          <p className="text-[11px] font-medium uppercase tracking-wider text-ash">
             Contato
           </p>
           <p className="mt-1 text-sm">{formatarTelefone(pedido.telefone)}</p>
           {pedido.email ? (
-            <p className="text-sm text-ink-soft">{pedido.email}</p>
+            <p className="text-sm text-ash">{pedido.email}</p>
           ) : null}
         </div>
 
         <div>
-          <p className="text-[11px] font-medium uppercase tracking-wider text-ink-soft">
+          <p className="text-[11px] font-medium uppercase tracking-wider text-ash">
             Entrega
           </p>
           <p className="mt-1 whitespace-pre-line text-sm">{endereco}</p>
@@ -278,7 +278,7 @@ function CartaoPedido({ pedido }: { pedido: PedidoLinha }) {
       </div>
 
       {pedido.observacao ? (
-        <p className="mt-3 rounded-lg bg-muted px-3 py-2 text-sm text-ink-soft">
+        <p className="mt-3 rounded-lg bg-muted px-3 py-2 text-sm text-ash">
           {pedido.observacao}
         </p>
       ) : null}

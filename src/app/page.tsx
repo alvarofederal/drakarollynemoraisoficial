@@ -1,32 +1,20 @@
 import Image from "next/image"
 import Link from "next/link"
-import {
-  BookOpen,
-  Instagram,
-  Mail,
-  Phone,
-  Quote,
-  ShieldCheck,
-  ShieldEllipsis,
-  Stethoscope,
-  Truck,
-} from "lucide-react"
 import { site } from "@/config/site"
 import { Nav } from "./_components/nav"
 import { ComprarButton } from "./_components/comprar-button"
 
 export default function Home() {
   return (
-    <div id="topo" className="min-h-screen bg-background">
+    <div id="topo" className="bg-white">
       <Nav />
 
       <main>
         <Hero />
-        <Garantias />
+        <OQueVoceLeva />
         <SobreOLivro />
-        <SobreAAutora />
-        <ChamadaFinal />
-        <Contato />
+        <AAutora />
+        <CartaoDestaque />
       </main>
 
       <Rodape />
@@ -34,201 +22,120 @@ export default function Home() {
   )
 }
 
-/* ══════════════════════════════════════════════
-   HERO — a capa do livro é a protagonista
-   ══════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   HERO — céu, nuvens e o livro flutuando
+   ══════════════════════════════════════════════════════════ */
 function Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28">
-      {/* Halo suave atrás do livro */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-[-10%] top-10 size-[42rem] rounded-full opacity-60 blur-3xl"
-        style={{
-          background:
-            "radial-gradient(circle, color-mix(in oklch, var(--accent-warm) 28%, transparent) 0%, transparent 65%)",
-        }}
-      />
+    <section className="sky relative min-h-[100svh] overflow-hidden">
+      {/* Banco de nuvens em deriva lenta */}
+      <div className="cloud-layer" aria-hidden>
+        <div className="cloud cloud-a" />
+        <div className="cloud cloud-b" />
+        <div className="cloud cloud-c" />
+        <div className="cloud-floor" />
+      </div>
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
-        <div className="order-2 lg:order-1">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand-soft px-4 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-brand-strong">
-            <BookOpen className="size-3.5" />
-            Primeira obra
-          </span>
-
-          <h1 className="mt-6 text-balance text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-            {site.livro.titulo}
+      <div className="relative mx-auto flex min-h-[100svh] max-w-[1200px] flex-col px-6 pb-8 pt-24 sm:pt-28 lg:px-8 lg:pb-10 lg:pt-32">
+        {/* Título em escala arquitetônica + assinatura da autora */}
+        <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-start lg:gap-10">
+          <h1 className="t-hero max-w-[11ch] text-ink">
+            Diário do Internato<span className="text-clay">.</span>
           </h1>
 
-          <p className="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-ink-soft sm:text-xl">
-            {site.livro.sinopse}
-          </p>
-
-          <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <ComprarButton className="w-full sm:w-auto" />
-            <p className="text-sm text-ink-soft">
-              Entrega para todo o Brasil
+          <div className="lg:pt-4">
+            <p className="t-subheading max-w-xs text-ink">
+              A medicina que só se aprende no toque, no olhar, na empatia.
+            </p>
+            <p className="mt-4 t-caption text-ink/60">
+              {site.autora.nome}
+              <br />
+              {site.autora.titulo}
             </p>
           </div>
-
-          <p className="mt-8 border-l-2 border-accent-warm/60 pl-4 text-sm italic leading-relaxed text-ink-soft">
-            “Aquela medicina que não se encontra nos livros e só pode ser
-            encontrada no toque, no olhar, na empatia.”
-            <span className="mt-1 block not-italic font-medium text-ink">
-              — {site.autora.nome}
-            </span>
-          </p>
         </div>
 
-        {/* Capa do livro */}
-        <div className="order-1 flex justify-center lg:order-2">
-          <div className="floating relative w-[16rem] sm:w-[20rem] lg:w-[23rem]">
+        {/* O livro é o herói da composição */}
+        <div className="relative flex flex-1 items-center justify-center py-6 lg:py-4">
+          <div className="floating relative w-[11.5rem] sm:w-[15rem] lg:w-[19rem]">
             <div className="relative aspect-[2/3]">
               <Image
                 src={site.imagens.capaLivro}
                 alt={`Capa do livro ${site.livro.titulo}, de ${site.autora.nome}`}
                 fill
                 priority
-                sizes="(max-width: 640px) 16rem, (max-width: 1024px) 20rem, 23rem"
-                className="book-shadow rounded-sm object-contain"
+                sizes="(max-width: 640px) 11.5rem, (max-width: 1024px) 15rem, 19rem"
+                className="book-shadow object-contain"
               />
             </div>
           </div>
         </div>
+
+        {/* Rodapé do hero: legenda à esquerda, ações à direita */}
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <p className="t-caption max-w-xs text-ink">
+            Relatos do cotidiano médico. Entrega para todo o Brasil.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <ComprarButton />
+            {/* No celular a altura é preciosa — o CTA principal basta */}
+            <a
+              href="#livro"
+              className="hidden rounded-full border border-ink/25 px-6 py-3.5 text-[17px] font-bold tracking-tight text-ink transition-colors hover:bg-ink/5 sm:inline-flex"
+            >
+              Conhecer o livro
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   )
 }
 
-/* ══════════════════════════════════════════════
-   FAIXA DE GARANTIAS
-   ══════════════════════════════════════════════ */
-function Garantias() {
-  const itens = [
-    { icone: Truck, titulo: "Envio para todo o Brasil", texto: "Você informa o endereço e nós cuidamos do resto." },
-    { icone: ShieldCheck, titulo: "Pagamento seguro", texto: "Checkout processado pelo Stripe." },
-    { icone: Stethoscope, titulo: "Escrito por quem viveu", texto: "Relatos reais do cotidiano médico." },
+/* ══════════════════════════════════════════════════════════
+   BLOCOS DE FEATURE — gravidade à direita, fios de 1px
+   ══════════════════════════════════════════════════════════ */
+function OQueVoceLeva() {
+  const blocos = [
+    {
+      titulo: "Escrito por quem viveu",
+      texto:
+        "Relatos do cotidiano médico registrados de dentro do hospital, entre plantões e corredores.",
+    },
+    {
+      titulo: "O lado humano da medicina",
+      texto:
+        "O medo antes do primeiro procedimento, o silêncio depois de uma notícia difícil, a alegria miúda de quem melhora.",
+    },
+    {
+      titulo: "Entrega para todo o Brasil",
+      texto:
+        "Você informa o endereço no site e o exemplar segue para a sua casa.",
+    },
+    {
+      titulo: "Pagamento seguro",
+      texto:
+        "Checkout processado pelo Stripe. Seus dados servem apenas para o envio.",
+    },
   ]
 
   return (
-    <section className="border-y border-border bg-muted/40">
-      <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 sm:grid-cols-3 sm:px-8">
-        {itens.map(({ icone: Icone, titulo, texto }) => (
-          <div key={titulo} className="flex items-start gap-3.5">
-            <Icone className="mt-0.5 size-5 shrink-0 text-brand" />
-            <div>
-              <p className="text-sm font-semibold">{titulo}</p>
-              <p className="mt-0.5 text-sm text-ink-soft">{texto}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-/* ══════════════════════════════════════════════
-   O LIVRO
-   ══════════════════════════════════════════════ */
-function SobreOLivro() {
-  return (
-    <section id="livro" className="scroll-mt-20 py-24 sm:py-32">
-      <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
-        <div className="relative">
-          {/* 2:3 é a proporção original da foto — evita cortar o livro */}
-          <div className="relative aspect-[2/3] overflow-hidden rounded-2xl bg-muted shadow-xl">
-            <Image
-              src={site.imagens.autoraComLivro}
-              alt={`${site.autora.nome} segurando o livro ${site.livro.titulo}`}
-              fill
-              sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover"
-            />
-          </div>
-        </div>
+    <section className="mx-auto max-w-[1200px] px-6 py-20 lg:px-8 lg:py-[80px]">
+      <div className="grid lg:grid-cols-2 lg:gap-20">
+        <div aria-hidden className="hidden lg:block" />
 
         <div>
-          <p className="text-xs font-medium uppercase tracking-[0.16em] text-brand">
-            Sobre o livro
-          </p>
-          <h2 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
-            {site.livro.subtitulo}
+          <h2 className="t-heading-lg max-w-md text-ink">
+            Um livro sobre o que não cabe no prontuário<span className="text-clay">.</span>
           </h2>
 
-          <div className="mt-6 space-y-4 text-base leading-relaxed text-ink-soft sm:text-lg">
-            <p>
-              Entre plantões, corredores e prontuários existe uma medicina que
-              nenhum compêndio ensina — a que acontece no instante em que uma
-              mão encontra a outra.
-            </p>
-            <p>
-              {site.livro.titulo} reúne os pequenos detalhes do cotidiano
-              médico: o medo antes do primeiro procedimento, o silêncio depois
-              de uma notícia difícil, a alegria miúda de um paciente que
-              melhora. Um convite a enxergar a formação médica pelo lado
-              humano.
-            </p>
-          </div>
-
-          <figure className="mt-8 rounded-xl border border-border bg-card p-6">
-            <Quote className="size-6 text-accent-warm" />
-            <blockquote className="mt-3 text-pretty text-base italic leading-relaxed">
-              Escrevo sobre os pequenos detalhes do cotidiano médico. Que bom
-              que você está aqui! Vamos juntos?
-            </blockquote>
-            <figcaption className="mt-3 text-sm font-medium text-ink-soft">
-              {site.autora.nome}
-            </figcaption>
-          </figure>
-
-          <div className="mt-8">
-            <ComprarButton>Quero meu exemplar</ComprarButton>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ══════════════════════════════════════════════
-   A AUTORA
-   ══════════════════════════════════════════════ */
-function SobreAAutora() {
-  const paragrafos = site.autora.bio.split("\n\n")
-
-  return (
-    <section
-      id="autora"
-      className="scroll-mt-20 border-y border-border bg-muted/40 py-24 sm:py-32"
-    >
-      <div className="mx-auto grid max-w-6xl items-start gap-14 px-5 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-        <div className="relative mx-auto w-full max-w-sm lg:sticky lg:top-24">
-          <div className="relative aspect-[2/3] overflow-hidden rounded-2xl bg-background shadow-xl">
-            <Image
-              src={site.imagens.autoraJaleco}
-              alt={`${site.autora.nome}, ${site.autora.titulo}`}
-              fill
-              sizes="(max-width: 1024px) 100vw, 35vw"
-              className="object-cover"
-            />
-          </div>
-        </div>
-
-        <div>
-          <p className="text-xs font-medium uppercase tracking-[0.16em] text-brand">
-            A autora
-          </p>
-          <h2 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
-            {site.autora.nome}
-          </h2>
-          <p className="mt-2 text-lg text-ink-soft">{site.autora.titulo}</p>
-
-          <div className="mt-7 space-y-4 text-base leading-relaxed text-ink-soft sm:text-lg">
-            {paragrafos.map((p, i) => (
-              <p key={i} className="text-pretty">
-                {p}
-              </p>
+          <div className="mt-14 grid gap-x-16 gap-y-12 sm:grid-cols-2">
+            {blocos.map((b) => (
+              <div key={b.titulo} className="hairline pt-5">
+                <h3 className="t-subheading text-ink">{b.titulo}</h3>
+                <p className="mt-3 t-body text-ash">{b.texto}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -237,46 +144,51 @@ function SobreAAutora() {
   )
 }
 
-/* ══════════════════════════════════════════════
-   CHAMADA FINAL
-   ══════════════════════════════════════════════ */
-function ChamadaFinal() {
+/* ══════════════════════════════════════════════════════════
+   O LIVRO — foto da autora com o exemplar
+   ══════════════════════════════════════════════════════════ */
+function SobreOLivro() {
   return (
-    <section className="py-24 sm:py-32">
-      <div className="mx-auto max-w-5xl px-5 sm:px-8">
-        <div className="relative overflow-hidden rounded-3xl border border-border bg-card px-6 py-14 text-center sm:px-14">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-56 opacity-70 blur-3xl"
-            style={{
-              background:
-                "radial-gradient(60% 100% at 50% 0%, color-mix(in oklch, var(--brand) 20%, transparent) 0%, transparent 70%)",
-            }}
-          />
+    <section id="livro" className="scroll-mt-24 pb-20 lg:pb-[80px]">
+      <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          {/* 2:3 é a proporção original da foto — evita cortar o livro */}
+          <div className="relative aspect-[2/3] w-full overflow-hidden bg-[#f4f3f2]">
+            <Image
+              src={site.imagens.autoraComLivro}
+              alt={`${site.autora.nome} segurando o livro ${site.livro.titulo}`}
+              fill
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="object-cover"
+            />
+          </div>
 
-          <div className="relative">
-            <div className="mx-auto mb-8 w-32">
-              <div className="relative aspect-[2/3]">
-                <Image
-                  src={site.imagens.capaLivro}
-                  alt={`Capa do livro ${site.livro.titulo}`}
-                  fill
-                  sizes="8rem"
-                  className="book-shadow rounded-sm object-contain"
-                />
-              </div>
+          <div>
+            <h2 className="t-display max-w-[13ch] text-ink">
+              A medicina que não está nos livros
+              <span className="text-clay">.</span>
+            </h2>
+
+            <div className="mt-8 space-y-6 t-body text-ash">
+              <p>
+                Entre plantões, corredores e prontuários existe uma medicina que
+                nenhum compêndio ensina — a que acontece no instante em que uma
+                mão encontra a outra.
+              </p>
+              <p>
+                {site.livro.titulo} reúne os pequenos detalhes desse cotidiano.
+                Um convite a enxergar a formação médica pelo lado humano, escrito
+                por quem atravessou cada plantão.
+              </p>
             </div>
 
-            <h2 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-              Leve {site.livro.titulo} para casa
-            </h2>
-            <p className="mx-auto mt-4 max-w-md text-pretty text-lg text-ink-soft">
-              Preencha o endereço de entrega e finalize o pagamento em poucos
-              minutos.
-            </p>
+            <blockquote className="hairline mt-10 pt-6 t-subheading max-w-md text-ink">
+              “Escrevo sobre os pequenos detalhes do cotidiano médico. Que bom
+              que você está aqui. Vamos juntos?”
+            </blockquote>
 
-            <div className="mt-9 flex justify-center">
-              <ComprarButton />
+            <div className="mt-10">
+              <ComprarButton>Quero meu exemplar</ComprarButton>
             </div>
           </div>
         </div>
@@ -285,25 +197,101 @@ function ChamadaFinal() {
   )
 }
 
-/* ══════════════════════════════════════════════
-   CONTATO
-   ══════════════════════════════════════════════ */
-function Contato() {
+/* ══════════════════════════════════════════════════════════
+   A AUTORA — faixa escura de contraste
+   ══════════════════════════════════════════════════════════ */
+function AAutora() {
+  const paragrafos = site.autora.bio.split("\n\n")
+
+  return (
+    <section id="autora" className="scroll-mt-24 bg-hull py-20 lg:py-[80px]">
+      <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
+        <div className="grid items-start gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <div className="relative aspect-[2/3] w-full max-w-sm overflow-hidden bg-deck">
+            <Image
+              src={site.imagens.autoraJaleco}
+              alt={`${site.autora.nome}, ${site.autora.titulo}`}
+              fill
+              sizes="(max-width: 1024px) 100vw, 35vw"
+              className="object-cover"
+            />
+          </div>
+
+          <div className="text-white">
+            <h2 className="t-heading-lg">
+              {site.autora.nome}
+              <span className="text-clay">.</span>
+            </h2>
+            <p className="mt-3 t-body text-white/55">{site.autora.titulo}</p>
+
+            <div className="mt-10 space-y-6 t-body text-white/85">
+              {paragrafos.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ══════════════════════════════════════════════════════════
+   CARTÃO DESTAQUE — o único bloco terracota da página
+   ══════════════════════════════════════════════════════════ */
+function CartaoDestaque() {
+  return (
+    <section className="mx-auto max-w-[1200px] px-6 py-20 lg:px-8 lg:py-[80px]">
+      <div className="grid bg-clay lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="px-8 py-14 sm:px-[59px] sm:py-[53px]">
+          <h2 className="t-display max-w-lg text-white">
+            Leve o Diário do Internato para casa.
+          </h2>
+          <p className="mt-6 max-w-md t-body text-white/85">
+            Você preenche o endereço de entrega, finaliza o pagamento em poucos
+            minutos e o exemplar sai para a sua casa.
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <ComprarButton tone="white" />
+            <span className="t-caption text-white/75">
+              Pagamento seguro pelo Stripe
+            </span>
+          </div>
+        </div>
+
+        <div className="relative flex items-end justify-center px-8 pb-0 pt-4 sm:px-12 lg:pt-14">
+          <div className="relative aspect-[2/3] w-[11rem] translate-y-[1px] sm:w-[13rem]">
+            <Image
+              src={site.imagens.capaLivro}
+              alt={`Capa do livro ${site.livro.titulo}`}
+              fill
+              sizes="13rem"
+              className="book-shadow object-contain"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ══════════════════════════════════════════════════════════
+   RODAPÉ TERMINAL
+   ══════════════════════════════════════════════════════════ */
+function Rodape() {
   const canais = [
     {
-      icone: Mail,
       rotulo: "E-mail",
       valor: site.contato.email,
       href: `mailto:${site.contato.email}`,
     },
     {
-      icone: Phone,
       rotulo: "WhatsApp",
       valor: site.contato.telefone,
       href: `https://wa.me/${site.contato.whatsapp}`,
     },
     {
-      icone: Instagram,
       rotulo: "Instagram",
       valor: site.contato.instagramHandle,
       href: site.contato.instagram,
@@ -311,59 +299,43 @@ function Contato() {
   ]
 
   return (
-    <section
-      id="contato"
-      className="scroll-mt-20 border-t border-border bg-muted/40 py-20 sm:py-24"
-    >
-      <div className="mx-auto max-w-5xl px-5 text-center sm:px-8">
-        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Vamos conversar
-        </h2>
-        <p className="mx-auto mt-3 max-w-lg text-pretty text-ink-soft">
-          Dúvidas sobre o livro, pedidos em quantidade ou convites — é só
-          chamar.
+    <footer id="contato" className="scroll-mt-24 bg-ink text-white">
+      <div className="mx-auto max-w-[1200px] px-6 py-20 lg:px-8 lg:py-[80px]">
+        <p className="t-display max-w-xl">
+          Vamos conversar<span className="text-clay">.</span>
         </p>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          {canais.map(({ icone: Icone, rotulo, valor, href }) => (
+        <div className="mt-16 grid gap-10 sm:grid-cols-3">
+          {canais.map((c) => (
             <a
-              key={rotulo}
-              href={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="group rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md"
+              key={c.rotulo}
+              href={c.href}
+              target={c.href.startsWith("http") ? "_blank" : undefined}
+              rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="hairline-inverse group pt-5"
             >
-              <Icone className="mx-auto size-6 text-brand" />
-              <p className="mt-3 text-sm font-semibold">{rotulo}</p>
-              <p className="mt-1 break-words text-sm text-ink-soft group-hover:text-brand">
-                {valor}
+              <p className="text-[13px] uppercase tracking-[0.1em] text-white/45">
+                {c.rotulo}
+              </p>
+              <p className="mt-2 break-words text-[20px] transition-colors group-hover:text-white/60">
+                {c.valor}
               </p>
             </a>
           ))}
         </div>
-      </div>
-    </section>
-  )
-}
 
-/* ══════════════════════════════════════════════
-   RODAPÉ
-   ══════════════════════════════════════════════ */
-function Rodape() {
-  return (
-    <footer className="border-t border-border py-10">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-5 text-center sm:flex-row sm:justify-between sm:px-8 sm:text-left">
-        <p className="text-sm text-ink-soft">
-          © {new Date().getFullYear()} {site.autora.nome}. Todos os direitos
-          reservados.
-        </p>
-        <Link
-          href="/login"
-          className="inline-flex items-center gap-1.5 text-xs text-ink-soft/70 transition-colors hover:text-brand"
-        >
-          <ShieldEllipsis className="size-3.5" />
-          Acesso administrativo
-        </Link>
+        <div className="mt-20 flex flex-col gap-4 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="t-caption text-white/45">
+            © {new Date().getFullYear()} {site.autora.nome}. Todos os direitos
+            reservados.
+          </p>
+          <Link
+            href="/login"
+            className="t-caption text-white/35 transition-colors hover:text-white/70"
+          >
+            Acesso administrativo
+          </Link>
+        </div>
       </div>
     </footer>
   )

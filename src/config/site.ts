@@ -10,6 +10,7 @@ export const site = {
 
   autora: {
     nome: "Dra. Karollyne Morais",
+    nomeCurto: "Karollyne Morais",
     titulo: "Médica ortopedista, pesquisadora e escritora",
     bio: `Meu nome é Karollyne Morais e eu sou Médica. Mas não é só isso. Sou Médica Residente do Programa de Ortopedia e Traumatologia da Secretaria de Saúde do DF. Me formei pela Escola Superior de Ciências da Saúde — ESCS, a escola pública do DF. Também sou Mestre e Doutora em Ciências da Saúde pela Universidade de Brasília, onde dediquei mais de 6 anos à linha de pesquisa de "Farmacologia, Toxicologia e Produtos Naturais".
 

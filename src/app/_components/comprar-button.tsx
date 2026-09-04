@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useTransition } from "react"
-import { BookOpen, Loader2, Truck } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import {
@@ -31,13 +31,23 @@ const CAMPOS_VAZIOS = {
   uf: "",
 }
 
+// A pílula é a forma da ação neste sistema. Três tons, conforme a
+// superfície: tinta sobre branco, fantasma sobre escuro, branco sobre clay.
+const TONS = {
+  ink: "bg-ink text-white hover:bg-ink/88",
+  ghost: "border border-white/70 bg-transparent text-white hover:bg-white/10",
+  white: "bg-white text-ink hover:bg-white/90",
+} as const
+
 export function ComprarButton({
   className,
   size = "lg",
+  tone = "ink",
   children,
 }: {
   className?: string
   size?: "default" | "sm" | "lg"
+  tone?: keyof typeof TONS
   children?: React.ReactNode
 }) {
   const [aberto, setAberto] = useState(false)
@@ -108,22 +118,22 @@ export function ComprarButton({
         size={size}
         onClick={() => setAberto(true)}
         className={cn(
-          "rounded-full font-semibold shadow-lg shadow-brand/20 transition-transform hover:-translate-y-0.5",
+          "h-auto rounded-full px-6 py-3.5 text-[17px] font-bold tracking-tight shadow-none transition-colors",
+          TONS[tone],
+          size === "sm" && "px-5 py-2.5 text-[15px]",
           className
         )}
       >
-        <BookOpen className="mr-2 size-5" />
         {children ?? "Comprar o livro"}
       </Button>
 
       <Dialog open={aberto} onOpenChange={setAberto}>
         <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-2xl">
-              <Truck className="size-5 text-brand" />
+            <DialogTitle className="t-heading">
               Endereço de entrega
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="t-caption text-ash">
               Preencha os dados para o envio. Em seguida você vai para o
               pagamento seguro pelo Stripe.
             </DialogDescription>
@@ -237,7 +247,7 @@ export function ComprarButton({
               type="submit"
               size="lg"
               disabled={enviando}
-              className="mt-2 w-full rounded-full font-semibold"
+              className="mt-2 h-auto w-full rounded-full bg-ink py-3.5 text-[17px] font-bold tracking-tight text-white shadow-none hover:bg-ink/88"
             >
               {enviando ? (
                 <>
@@ -280,7 +290,10 @@ function Campo({
 } & Omit<React.ComponentProps<typeof Input>, "onChange" | "onBlur" | "id" | "value">) {
   return (
     <div className="grid gap-1.5">
-      <Label htmlFor={id} className="text-xs font-medium text-muted-foreground">
+      <Label
+        htmlFor={id}
+        className="text-[13px] font-medium uppercase tracking-[0.08em] text-ash"
+      >
         {rotulo}
       </Label>
       <div className="relative">
