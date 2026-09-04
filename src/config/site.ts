@@ -43,10 +43,7 @@ Nas (raras) horas vagas, eu escrevo. Escrevo sobre os pequenos detalhes do cotid
   },
 
   contato: {
-    email: "consultarapida.kmorais@gmail.com",
-    telefone: "(61) 99620-1560",
-    whatsapp: "5561996201560",
-    instagram: "https://www.instagram.com/morais.karollyne",
-    instagramHandle: "@morais.karollyne",
+    instagram: "https://www.instagram.com/drakarollynemorais",
+    instagramHandle: "@drakarollynemorais",
   },
 } as const

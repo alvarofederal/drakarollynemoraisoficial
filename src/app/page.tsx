@@ -38,7 +38,7 @@ function Hero() {
 
       {/* O padding do topo precisa folgar a nav de 76px — nada de título
           passando por baixo dela. */}
-      <div className="relative mx-auto flex min-h-[100svh] max-w-[1200px] flex-col px-6 pb-8 pt-28 sm:pt-32 lg:px-8 lg:pt-36">
+      <div className="relative mx-auto flex min-h-[100svh] max-w-[1200px] flex-col px-6 pb-8 pt-32 sm:pt-36 lg:px-8 lg:pt-44">
         {/* Título em escala arquitetônica + assinatura da autora */}
         <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-start lg:gap-10">
           <h1 className="t-hero max-w-[11ch] text-ink">
@@ -59,16 +59,18 @@ function Hero() {
 
         {/* O livro é o herói da composição */}
         <div className="relative flex flex-1 items-center justify-center py-4 lg:py-2">
-          <div className="floating relative w-[10rem] sm:w-[13rem] lg:w-[15.5rem]">
-            {/* Proporção real da capa (860×1473) — qualquer outra deforma */}
-            <div className="relative aspect-[860/1473]">
+          <div className="floating relative w-[9rem] sm:w-[11.5rem] lg:w-[13rem]">
+            {/* Capa alongada de propósito: 7% mais alta que a proporção do
+                arquivo (860×1473), a pedido da autora. object-fill é o que
+                faz a imagem acompanhar a caixa. */}
+            <div className="relative aspect-[860/1576]">
               <Image
                 src={site.imagens.capaLivro}
                 alt={`Capa do livro ${site.livro.titulo}, de ${site.autora.nome}`}
                 fill
                 priority
-                sizes="(max-width: 640px) 10rem, (max-width: 1024px) 13rem, 15.5rem"
-                className="book-shadow object-contain"
+                sizes="(max-width: 640px) 9rem, (max-width: 1024px) 11.5rem, 13rem"
+                className="book-shadow object-fill"
               />
             </div>
           </div>
@@ -265,13 +267,13 @@ function CartaoDestaque() {
 
         <div className="relative flex items-center justify-center px-8 py-12 sm:px-12">
           <div className="floating relative w-[11rem] sm:w-[13rem] lg:w-[14rem]">
-            <div className="relative aspect-[860/1473]">
+            <div className="relative aspect-[860/1576]">
               <Image
                 src={site.imagens.capaLivro}
                 alt={`Capa do livro ${site.livro.titulo}`}
                 fill
                 sizes="14rem"
-                className="book-shadow object-contain"
+                className="book-shadow object-fill"
               />
             </div>
           </div>
@@ -285,24 +287,6 @@ function CartaoDestaque() {
    RODAPÉ TERMINAL
    ══════════════════════════════════════════════════════════ */
 function Rodape() {
-  const canais = [
-    {
-      rotulo: "E-mail",
-      valor: site.contato.email,
-      href: `mailto:${site.contato.email}`,
-    },
-    {
-      rotulo: "WhatsApp",
-      valor: site.contato.telefone,
-      href: `https://wa.me/${site.contato.whatsapp}`,
-    },
-    {
-      rotulo: "Instagram",
-      valor: site.contato.instagramHandle,
-      href: site.contato.instagram,
-    },
-  ]
-
   return (
     <footer id="contato" className="scroll-mt-24 bg-ink text-white">
       <div className="mx-auto max-w-[1200px] px-6 py-20 lg:px-8 lg:py-[80px]">
@@ -310,23 +294,20 @@ function Rodape() {
           Vamos conversar<span className="text-clay">.</span>
         </p>
 
-        <div className="mt-16 grid gap-10 sm:grid-cols-3">
-          {canais.map((c) => (
-            <a
-              key={c.rotulo}
-              href={c.href}
-              target={c.href.startsWith("http") ? "_blank" : undefined}
-              rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="hairline-inverse group pt-5"
-            >
-              <p className="text-[13px] uppercase tracking-[0.1em] text-white/45">
-                {c.rotulo}
-              </p>
-              <p className="mt-2 break-words text-[20px] transition-colors group-hover:text-white/60">
-                {c.valor}
-              </p>
-            </a>
-          ))}
+        <div className="mt-16 max-w-sm">
+          <a
+            href={site.contato.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hairline-inverse group block pt-5"
+          >
+            <p className="text-[13px] uppercase tracking-[0.1em] text-white/45">
+              Instagram
+            </p>
+            <p className="mt-2 break-words text-[23px] transition-colors group-hover:text-white/60">
+              {site.contato.instagramHandle}
+            </p>
+          </a>
         </div>
 
         <div className="mt-20 flex flex-col gap-4 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
