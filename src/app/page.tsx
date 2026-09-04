@@ -36,7 +36,9 @@ function Hero() {
         <div className="cloud-floor" />
       </div>
 
-      <div className="relative mx-auto flex min-h-[100svh] max-w-[1200px] flex-col px-6 pb-8 pt-24 sm:pt-28 lg:px-8 lg:pb-10 lg:pt-32">
+      {/* O padding do topo precisa folgar a nav de 76px — nada de título
+          passando por baixo dela. */}
+      <div className="relative mx-auto flex min-h-[100svh] max-w-[1200px] flex-col px-6 pb-8 pt-28 sm:pt-32 lg:px-8 lg:pt-36">
         {/* Título em escala arquitetônica + assinatura da autora */}
         <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-start lg:gap-10">
           <h1 className="t-hero max-w-[11ch] text-ink">
@@ -56,15 +58,16 @@ function Hero() {
         </div>
 
         {/* O livro é o herói da composição */}
-        <div className="relative flex flex-1 items-center justify-center py-6 lg:py-4">
-          <div className="floating relative w-[11.5rem] sm:w-[15rem] lg:w-[19rem]">
-            <div className="relative aspect-[2/3]">
+        <div className="relative flex flex-1 items-center justify-center py-4 lg:py-2">
+          <div className="floating relative w-[10rem] sm:w-[13rem] lg:w-[15.5rem]">
+            {/* Proporção real da capa (860×1473) — qualquer outra deforma */}
+            <div className="relative aspect-[860/1473]">
               <Image
                 src={site.imagens.capaLivro}
                 alt={`Capa do livro ${site.livro.titulo}, de ${site.autora.nome}`}
                 fill
                 priority
-                sizes="(max-width: 640px) 11.5rem, (max-width: 1024px) 15rem, 19rem"
+                sizes="(max-width: 640px) 10rem, (max-width: 1024px) 13rem, 15.5rem"
                 className="book-shadow object-contain"
               />
             </div>
@@ -260,15 +263,17 @@ function CartaoDestaque() {
           </div>
         </div>
 
-        <div className="relative flex items-end justify-center px-8 pb-0 pt-4 sm:px-12 lg:pt-14">
-          <div className="relative aspect-[2/3] w-[11rem] translate-y-[1px] sm:w-[13rem]">
-            <Image
-              src={site.imagens.capaLivro}
-              alt={`Capa do livro ${site.livro.titulo}`}
-              fill
-              sizes="13rem"
-              className="book-shadow object-contain"
-            />
+        <div className="relative flex items-center justify-center px-8 py-12 sm:px-12">
+          <div className="floating relative w-[11rem] sm:w-[13rem] lg:w-[14rem]">
+            <div className="relative aspect-[860/1473]">
+              <Image
+                src={site.imagens.capaLivro}
+                alt={`Capa do livro ${site.livro.titulo}`}
+                fill
+                sizes="14rem"
+                className="book-shadow object-contain"
+              />
+            </div>
           </div>
         </div>
       </div>

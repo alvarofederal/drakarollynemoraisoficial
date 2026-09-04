@@ -14,7 +14,7 @@ export const site = {
     titulo: "Médica ortopedista, pesquisadora e escritora",
     bio: `Meu nome é Karollyne Morais e eu sou Médica. Mas não é só isso. Sou Médica Residente do Programa de Ortopedia e Traumatologia da Secretaria de Saúde do DF. Me formei pela Escola Superior de Ciências da Saúde — ESCS, a escola pública do DF. Também sou Mestre e Doutora em Ciências da Saúde pela Universidade de Brasília, onde dediquei mais de 6 anos à linha de pesquisa de "Farmacologia, Toxicologia e Produtos Naturais".
 
-Acima de tudo, sou esposa e mãe. Esposa privilegiada por ter alguém com quem posso sempre contar, e mãe de 3 crianças lindas e barulhentas. Sou filha, e tudo que conquistei devo ao altruísmo da minha mãe. Também sou católica, e a minha fé permeia todos os aspectos da minha vida.
+Acima de tudo, sou esposa e mãe. Esposa privilegiada por ter alguém com quem posso sempre contar, e mãe de 3 crianças lindas e barulhentas. Também sou católica, e a minha fé permeia todos os aspectos da minha vida.
 
 Nas (raras) horas vagas, eu escrevo. Escrevo sobre os pequenos detalhes do cotidiano médico. Aquela medicina que não se encontra nos livros e só pode ser encontrada no toque, no olhar, na empatia.`,
   },
