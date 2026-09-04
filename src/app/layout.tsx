@@ -1,96 +1,87 @@
 // src/app/layout.tsx
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Open_Sans } from "next/font/google";
-import "./globals.css";
-import { SessionAuthProvider } from "@/components/session-auth";
-import { QueryClientContext } from "@/providers/queryclient";
-import { Toaster } from "sonner";
+import type { Metadata } from "next"
+import { Inter, Playfair_Display } from "next/font/google"
+import { Toaster } from "sonner"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { site } from "@/config/site"
+import "./globals.css"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
+  display: "swap",
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-});
-
-const openSans = Open_Sans({
-  variable: "--font-open-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "600", "700", "800"],
-});
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+})
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://courtesyfy.com.br"),
+  metadataBase: new URL(site.url),
   title: {
-    default: "Courtesyfy",
-    template: "%s | Courtesyfy",
+    default: `${site.autora.nome} — ${site.livro.titulo}`,
+    template: `%s | ${site.autora.nome}`,
   },
-  description: "Gestão de campanhas promocionais com chaves únicas. Crie campanhas, gere QR Codes e valide resgates com facilidade.",
-  keywords: ["cortesias", "campanhas promocionais", "QR Code", "chaves únicas", "gestão de promoções"],
-  authors: [{ name: "Courtesyfy", url: "https://courtesyfy.com.br" }],
+  description: site.livro.sinopse,
+  keywords: [
+    "Karollyne Morais",
+    site.livro.titulo,
+    "livro de medicina",
+    "internato médico",
+    "ortopedia",
+    "literatura médica",
+  ],
+  authors: [{ name: site.autora.nome, url: site.url }],
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    url: "https://courtesyfy.com.br",
-    siteName: "Courtesyfy",
-    title: "Courtesyfy — Campanhas com chaves únicas",
-    description: "Crie campanhas, gere QR Codes e valide resgates com facilidade.",
+    url: site.url,
+    siteName: site.autora.nome,
+    title: `${site.livro.titulo} — ${site.autora.nome}`,
+    description: site.livro.sinopse,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Courtesyfy",
-    description: "Gestão de campanhas promocionais com chaves únicas.",
+    title: `${site.livro.titulo} — ${site.autora.nome}`,
+    description: site.livro.sinopse,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+  robots: { index: true, follow: true },
+}
 
-// Script injetado no <head> — executa ANTES do React hidratar.
-// Lê a preferência salva e aplica a classe .dark no <html> imediatamente,
-// evitando o flash de tema errado na primeira renderização.
+// Aplica o tema salvo antes da hidratação — evita flash.
+// Padrão do site é claro; o escuro só entra se o usuário escolher.
 const themeScript = `
 (function(){
   try {
-    var t = localStorage.getItem('cfy-theme');
-    if (t === 'light') {
-      document.documentElement.classList.remove('dark');
-    } else {
-      // padrão é escuro
+    if (localStorage.getItem('km-theme') === 'dark') {
       document.documentElement.classList.add('dark');
     }
-  } catch(e) {
-    document.documentElement.classList.add('dark');
-  }
+  } catch(e) {}
 })();
-`.trim();
+`.trim()
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      {/* Script de tema roda antes da hidratação — sem flash */}
+    // As variáveis das fontes ficam no <html> para que os tokens de
+    // `:root` no globals.css consigam enxergá-las.
+    <html
+      lang="pt-BR"
+      className={`${inter.variable} ${playfair.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${openSans.variable} antialiased`}
-        suppressHydrationWarning
-      >
-        <SessionAuthProvider>
-          <QueryClientContext>
-            {children}
-            <Toaster position="top-right" richColors duration={2500} />
-          </QueryClientContext>
-        </SessionAuthProvider>
+      <body className="antialiased" suppressHydrationWarning>
+        {children}
+        <Toaster position="top-center" richColors duration={3500} />
+        <SpeedInsights />
       </body>
     </html>
-  );
+  )
 }

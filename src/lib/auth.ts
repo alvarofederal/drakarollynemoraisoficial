@@ -16,12 +16,6 @@ declare module "next-auth" {
   }
 }
 
-declare module "next-auth/jwt" {
-  interface JWT {
-    id?: string
-  }
-}
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
 
@@ -68,12 +62,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
 
   callbacks: {
+    // `sub` já é o campo padrão do JWT para o id do usuário — usá-lo evita
+    // ter que aumentar o tipo JWT do next-auth.
     async jwt({ token, user }) {
-      if (user?.id) token.id = user.id
+      if (user?.id) token.sub = user.id
       return token
     },
     async session({ session, token }) {
-      if (token.id) session.user.id = token.id
+      if (token.sub) session.user.id = token.sub
       return session
     },
   },

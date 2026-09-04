@@ -1,99 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dra. Karollyne Morais — site do livro *Diário do Internato*
 
-## Getting Started
+Landing page de venda do livro, com painel administrativo para acompanhar os
+pedidos e os endereços de entrega.
 
-First, run the development server:
+## Stack
+
+Next.js 16 (App Router) · TypeScript · Tailwind CSS 4 · shadcn/ui ·
+Prisma + MySQL · NextAuth v5 · Cloudinary · Vercel
+
+## Como rodar
 
 ```bash
+cp .env.example .env
+npx auth secret
+npm install
+npm run db:push
+npm run db:seed
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O site sobe em http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Rotas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/` — landing page
+- `/login` — acesso ao painel
+- `/admin` — pedidos e endereços de entrega
 
-## Learn More
+## Onde editar
 
-To learn more about Next.js, take a look at the following resources:
+| O quê | Onde |
+|-------|------|
+| Textos, fotos, link do Stripe, contatos | `src/config/site.ts` |
+| Identidade visual (cores) | bloco `MARCA` em `src/app/globals.css` |
+| Seções da landing | `src/app/page.tsx` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# basemedical" 
-
-
-# Sequência para Git Flow
-
-
-## Iniciando o Git Flow
-git checkout -b develop
-git flow init
-
-
-## Criação de uma feature
-git checkout develop
-git checkout -b name-feature
-
-git flow feature start name-feature
-
-
-## Finalização de uma feature
-git checkout develop
-git merge name-feature
-
-git flow feature finish name-feature
-
-
-
-### Branch Hotfix
-##Criação de um Hotfix
-git checkout master
-git checkout -b name-hotfix
-
-git flow hotfix start name-hotfix
-
-## Finalização de um Hotfix
-git checkout master
-git merge name-hotfix
-git checkout develop
-git merge name-hotfix
-git tag name-hotfix
-
-git flow hotfix finish name-hotfix
-
-
-
-### Branch Release
-## Criação de uma Release
-git checkout develop
-git checkout -b release/1.0.0
-
-git flow release start 1.0.0
-
-## Finalização de uma Release
-git checkout master
-git merge release/1.0.0
-git checkout develop
-git merge release/1.0.0
-git tag 1.0.0
-
-git flow release finish 1.0.0
-
-git checkout -b secao5aula50
-"# courtesyfy" 
-# courtesyfy
+| Comando | Faz |
+|---------|-----|
+| `npm run dev` | Servidor de desenvolvimento |
+| `npm run build` | Build de produção (roda `prisma generate` + `db push`) |
+| `npm run db:push` | Sincroniza o schema com o banco |
+| `npm run db:studio` | Abre o Prisma Studio |
+| `npm run db:seed` | Cria/atualiza o usuário admin |
+| `npm test` | Testes (Vitest) |

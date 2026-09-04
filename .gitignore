@@ -48,3 +48,6 @@ next-env.d.ts
 backups/
 *.sql
 .claude/worktrees/
+
+# permite versionar o exemplo de env
+!.env.example

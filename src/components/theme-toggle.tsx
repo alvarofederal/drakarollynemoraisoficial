@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react"
 import { Moon, Sun } from "lucide-react"
 
-const STORAGE_KEY = "cfy-theme"
+const STORAGE_KEY = "km-theme"
 
 export function ThemeToggle() {
-  const [isDark, setIsDark] = useState(true)   // padrão escuro
+  const [isDark, setIsDark] = useState(false)  // padrão claro
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {

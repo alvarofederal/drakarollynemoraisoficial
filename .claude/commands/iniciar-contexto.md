@@ -1,32 +1,18 @@
 ---
-description: Carrega todo o contexto do projeto Basemedical (system, architecture, rules, roadmap, features, knowledge)
+description: Carrega todo o contexto do projeto (site da Dra. Karollyne Morais)
 ---
 
-Leia, em paralelo, os arquivos de contexto do projeto Basemedical na ordem abaixo, e depois me apresente um resumo curto (máx. 10 bullets) do estado atual do projeto, destacando:
+Leia, nesta ordem, para entrar no contexto do projeto:
 
-1. Versão atual e branch ativo
-2. Stack e infraestrutura
-3. O que está em desenvolvimento agora
-4. Bugs conhecidos / improvements pendentes
-5. Regras críticas que não posso ignorar
-6. Próximo marco do roadmap
+1. `CLAUDE.md` — visão geral, fluxo de compra, regras
+2. `context/system.md` — atores e integrações
+3. `context/architecture.md` — estrutura de pastas e padrões
+4. `context/rules.md` — convenções e checklist
+5. `knowledge/database.md` — schema do banco
+6. `knowledge/api.md` — Server Actions e rotas
+7. `knowledge/domain.md` — vocabulário e regras de negócio
+8. `development/features.md` — o que está em andamento
+9. `planning/roadmap.md` — o que vem pela frente
 
-Arquivos para ler em paralelo:
-
-- `CLAUDE.md`
-- `context/system.md`
-- `context/architecture.md`
-- `context/rules.md`
-- `planning/roadmap.md`
-- `planning/backlog.md`
-- `planning/releases.md`
-- `development/features.md`
-- `development/bugs.md`
-- `development/improvements.md`
-- `knowledge/database.md`
-- `knowledge/api.md`
-- `knowledge/domain.md`
-
-Após o resumo, pergunte: **"Qual contexto você quer aprofundar antes de começarmos?"** e aguarde minha resposta.
-
-NÃO altere nenhum arquivo. NÃO execute nenhum comando além das leituras. Seja conciso.
+Depois, dê um resumo em até 10 linhas de: o que é o projeto, o que já está
+pronto e qual é a próxima prioridade.
